@@ -27,9 +27,15 @@ class AdjacencyList(Graph):
         self.name_counter = 0
 
     def iter_edges(self) -> Iterator[Edge]:
-        for v in self.vertices:
-            for e in v.edges:
-                yield e
+        if self.directed:
+            for v in self.vertices:
+                for e in v.edges:
+                    yield e
+        else:
+            for v in self.vertices:
+                for e in v.edges:
+                    if e.u <= e.v:
+                        yield e
 
     def iter_vertices(self) -> Iterator[Vertex]:
         for v in self.vertices:
@@ -43,6 +49,8 @@ class AdjacencyList(Graph):
             print("Vertex index greater than current number of vertices")
             return
         self.vertices[u].edge(u, v, w)
+        if not self.directed:
+            self.vertices[v].edge(v, u, w)
 
     def add_edge(self, edge: Edge):
         if edge.u >= self.size() or edge.v >= self.size():
@@ -50,6 +58,7 @@ class AdjacencyList(Graph):
             return
         else:
             self.vertices[edge.u].edges.append(edge)
+            self.vertices[edge.getEnd()].edge(edge.getEnd(), edge.getStart(), edge.getWeight())
 
     def vertex(self, name: str = "", value=None):
         if name == "":
@@ -84,9 +93,6 @@ class AdjacencyList(Graph):
             else:
                 dot.node(str(i))
         for e in self.iter_edges():
-            if not self.directed:
-                if e.v > e.u:
-                    continue
             if self.weighted:
                 dot.edge(str(e.u), str(e.v), str(e.w))
             else:

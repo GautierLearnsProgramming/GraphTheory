@@ -15,7 +15,7 @@ def gen_tree(size: int, children_mean: float = 0, children_std_dev=2) -> Adjacen
 
     depth = 0
     layer_connected = False
-    depth_array = [0 for i in range(size)]
+    depth_array = [0 for _ in range(size)]
 
     tree = AdjacencyList(False, False)
     hasParentIndex = 1
@@ -83,9 +83,5 @@ def gen_random_graph(size: int = 25, mean_edges: float = 5, std_dev_edges: float
             if weighted:
                 weight = round(random_float(mean_weight, std_dev_weight))
                 edge.w = weight
-            if directed:
-                graph.add_edge(edge)
-            else:
-                graph.edge(edge.u, edge.v, edge.w)
-                graph.edge(edge.v, edge.u, edge.w)
+            graph.add_edge(edge)
     return graph
