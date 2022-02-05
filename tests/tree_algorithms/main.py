@@ -1,4 +1,5 @@
-from src.tree_algorithms import graph
+import src.tree_algorithms.utils
+from src.tree_algorithms import center
 
 
 tree = {
@@ -8,5 +9,5 @@ tree = {
         4: [2]
     }
 
-graph.deleteNode(tree, 1)
+src.tree_algorithms.utils.deleteNode(tree, 1)
 print(tree)

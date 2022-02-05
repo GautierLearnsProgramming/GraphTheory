@@ -1,8 +1,5 @@
 # Delete a node in an undirected graph
-def deleteNode(graph: dict[int, list[int]], node_index: int):
-    neighbors = graph.pop(node_index)
-    for neighbor_index in neighbors:
-        graph[neighbor_index].remove(node_index)
+from src.tree_algorithms.utils import deleteNode
 
 
 # Find center returns a list containing one or two integers representing the indexes of the center of the two centers

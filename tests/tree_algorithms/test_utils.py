@@ -1,4 +1,4 @@
-from src.tree_algorithms import graph
+import src.tree_algorithms.utils
 
 
 def test_delete_node():
@@ -9,6 +9,6 @@ def test_delete_node():
         4: [2]
     }
 
-    graph.deleteNode(tree, 1)
+    src.tree_algorithms.utils.deleteNode(tree, 1)
     assert len(tree[2]) == 1
     assert len(tree[3]) == 0
