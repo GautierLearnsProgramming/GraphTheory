@@ -7,6 +7,7 @@ name = "pypi"
 graphviz = "*"
 multipledispatch = "*"
 multidispatch = "*"
+pytest = "*"
 
 [dev-packages]
 
