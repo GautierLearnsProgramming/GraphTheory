@@ -32,14 +32,3 @@ def topSortRecursiveCallback(node_index: int, graph: list[list[int]], visited: l
             topSortRecursiveCallback(child_index, graph, visited, partialTopologicalOrder)
     partialTopologicalOrder.append(node_index)
 
-def topSortDict(graph: dict[int, list[int]]):
-    visited = {node_index: False for node_index in graph}
-    node_indexes = list(graph.keys())
-    dfs_start_index = node_indexes[0]
-
-def topSortRecursiveCallbackDict(node_index: int, graph: list[list[int]], visited: dict[int, bool], partialTopologicalOrder: list[int]):
-    for child_index in graph[node_index]:
-        if not visited[child_index]:
-            visited[child_index] = True
-            topSortRecursiveCallback(child_index, graph, visited, partialTopologicalOrder)
-    partialTopologicalOrder.append(node_index)
