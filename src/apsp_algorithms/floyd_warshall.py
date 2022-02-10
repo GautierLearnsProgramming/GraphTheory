@@ -40,3 +40,32 @@ def floyd_warshall(adj_matrix: list[list[float]]) -> (list[list[float]], list[li
             for j in range(n):
                 dist_matrix[i][j] = temp_matrix[i][j]
     return dist_matrix, next_matrix
+
+
+def path_reconstruction(i: int, j: int, next_matrix: list[list[Union[int, None]]]) -> Union[list[int], None]:
+    """ Compute the optimal path from node i to node j
+
+    The path reconstruction function lets us reconstruct the optimal path from i to j using the next matrix
+    computed with the floyd-warshall algorithm.
+
+    Args:
+        i: The index of the start node
+        j: The index of the end node
+        next_matrix: The next matrix computed during the floyd-warshall algorithm execution.
+    Returns:
+        A list of indexes that start with the start node's index and end with the end node's index representing the
+        optimal path from the start node the end node.
+    """
+    # Each column j in the next matrix can be seen as a "prev array" for node j, that is, to go from node i to node j,
+    # one should first visit k = next_matrix[i][j], then next[k][j], etc... util we reach j
+    if next_matrix[i][j] is None:
+        return None
+
+    optimal_path = [i]
+    k = next_matrix[i][j]
+    while k != j:
+        optimal_path.append(k)
+        k = next_matrix[k][j]
+
+    optimal_path.append(j)
+    return optimal_path
