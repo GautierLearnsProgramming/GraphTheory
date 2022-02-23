@@ -18,7 +18,7 @@ def find_bridges(graph: list[list[int]]) -> [list[tuple[int, int]]]:
     ids: list[Union[None, int]] = [None] * len(graph)
     low_link: list[Union[None, int]] = [None] * len(graph)
     visited: list[bool] = [False] * len(graph)
-    edge_list: list[tuple[int, int]] = []
+    bridge_list: list[tuple[int, int]] = []
     current_id = 0
 
     def dfs(node_index: int, parent_index: int):
@@ -29,16 +29,19 @@ def find_bridges(graph: list[list[int]]) -> [list[tuple[int, int]]]:
 
         visited[node_index] = True
         for neighbor in graph[node_index]:
+            if neighbor == parent_index:
+                continue
             if not visited[neighbor]:
                 dfs(neighbor, node_index)
-            if neighbor != parent_index:
                 low_link[node_index] = min(low_link[node_index], low_link[neighbor])
-            if ids[node_index] < low_link[neighbor]:
-                edge_list.append((node_index, neighbor))
+                if ids[node_index] < low_link[neighbor]:
+                    bridge_list.append((node_index, neighbor))
+            else:
+                low_link[node_index] = min(low_link[node_index], ids[neighbor])
 
     for start in range(len(graph)):
         if visited[start]:
             continue
         dfs(start, -1)
 
-    return edge_list
+    return bridge_list
