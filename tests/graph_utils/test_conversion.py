@@ -40,3 +40,21 @@ def test_weighted_list_matrix_conversions():
 
     assert conversion.weighted_adj_matrix_to_adj_list(adj_matrix) == weighted_adj_list
     assert conversion.weighted_adj_list_to_adj_matrix(weighted_adj_list) == adj_matrix
+
+
+def test_weighted_adj_map_to_unweighted_adj_map():
+    weighted_adj_map = {
+        0: [(1, 2), (2, 5)],
+        1: [(3, 1)],
+        2: [(3, 5)],
+        3: []
+    }
+
+    unweighted_adj_map = conversion.weighted_adj_map_to_unweighted_adj_map(weighted_adj_map)
+    assert len(unweighted_adj_map) == 4
+    assert unweighted_adj_map[0].__contains__(1)
+    assert unweighted_adj_map[0].__contains__(2)
+    assert len(unweighted_adj_map[0]) == 2
+    assert unweighted_adj_map[1].__contains__(3)
+    assert unweighted_adj_map[2].__contains__(3)
+    assert len(unweighted_adj_map[3]) == 0
