@@ -2,7 +2,7 @@ from typing import Union
 
 
 def find_articulation_points(graph: list[list[int]]) -> list[bool]:
-    """ Find the articulation points of the given input graph
+    """ Find the articulation points of the given input undirected graph
 
     This algorithm finds the articulation points of a graph in O(V+E) time. An articulation point is a vertex of the
     graph that, if removed, would increase the number of connected components.
