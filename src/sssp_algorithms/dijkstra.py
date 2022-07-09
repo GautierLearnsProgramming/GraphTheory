@@ -9,8 +9,10 @@ def dijkstra_lazy(graph: list[list[tuple[int, float]]], start_node: int) -> tupl
         start_node: The index of the starting node
     Returns:
         A tuple containing :
-        - The distance from the starting node to every node in the graph
-        - A prev array allowing reconstruction of the path from the start node to any other node
+        - The distance from the starting node to every node in the graph. The start node is considered to be at distance
+        0 from itself, and inaccessible nodes will default to float('inf') distance.
+        - A prev array allowing reconstruction of the path from the start node to any other node. The start node itself
+        and any node not connected to the start node will default to a -1 prev index
     """
 
     n = len(graph)
